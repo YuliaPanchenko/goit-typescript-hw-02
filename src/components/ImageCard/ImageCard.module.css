@@ -1,0 +1,14 @@
+/* .imgWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  overflow: hidden;
+} */
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
