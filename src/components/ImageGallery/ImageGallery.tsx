@@ -1,10 +1,10 @@
 import css from "../ImageGallery/ImageGallery.module.css";
 import { ImageCard } from "../ImageCard/ImageCard";
-import { Images } from "../../types";
+import { UnsplashImage } from "../../types";
 
 interface ImageGalleryProps {
-  images: Images[];
-  onImageClick: (image: string) => void;
+  images: UnsplashImage[];
+  onImageClick: (image: UnsplashImage) => void;
 }
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({

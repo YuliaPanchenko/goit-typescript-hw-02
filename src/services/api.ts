@@ -1,14 +1,20 @@
 import axios from "axios";
+import { UnsplashResponse } from "../types";
 
 const API_KEY = "QPr4h1RkC7EADmqtvFooYswOJC37zxtDKZ3NK3ZARFc";
 const baseURL = "https://api.unsplash.com/search/photos";
 
-export const requestAllImages = async () => {
-  const { data } = await axios.get(`${BASE_URL}/photos/?client_id=${API_KEY}`);
+export const requestAllImages = async (): Promise<UnsplashResponse> => {
+  const { data } = await axios.get<UnsplashResponse>(
+    `${baseURL}/photos/?client_id=${API_KEY}`
+  );
   return data;
 };
 
-export const requestAImagesBySearchValue = async (searchValue, page = 1) => {
+export const requestAImagesBySearchValue = async (
+  searchValue: string,
+  page: number = 1
+): Promise<UnsplashResponse> => {
   const params = {
     query: searchValue,
     page: page,
@@ -16,8 +22,8 @@ export const requestAImagesBySearchValue = async (searchValue, page = 1) => {
     client_id: API_KEY,
   };
 
-  const response = await axios.get(baseURL, { params });
-  return response.data;
+  const { data } = await axios.get<UnsplashResponse>(baseURL, { params });
+  return data;
 };
 
 // export const requestAImagesBySearchValue = async (searchValue, page = 1) => {

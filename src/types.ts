@@ -1,9 +1,14 @@
-export interface Images {
-  id: "string";
-  slug: "string";
-  urls: ImagesUrls;
+export interface UnsplashImage {
+  id: string;
+  urls: {
+    full: string;
+    thumb: string;
+    regular?: string;
+  };
+  alt_description: string;
 }
 
-export interface ImagesUrls {
-  string: "string";
+export interface UnsplashResponse {
+  results: UnsplashImage[];
+  total_pages: number;
 }

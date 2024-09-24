@@ -6,28 +6,35 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import Loader from "./components/Loader/Loader";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
-import { Images } from "../src/types";
+import { UnsplashImage, UnsplashResponse } from "../src/types";
 function App() {
-  const [images, setImages] = useState<Images[]>([]);
+  const [images, setImages] = useState<UnsplashImage[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<null>(null);
-  const [searchValue, setSearchValue] = useState<null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [searchValue, setSearchValue] = useState<string | null>(null);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const [modalImage, setModalImage] = useState<null>(null);
+  const [modalImage, setModalImage] = useState<UnsplashImage | null>(null);
 
   useEffect(() => {
     if (searchValue === null) return;
 
-    const fetchImagesBySearchValue = async () => {
+    const fetchImagesBySearchValue = async (): Promise<void> => {
       try {
         setIsLoading(true);
         const data = await requestAImagesBySearchValue(searchValue, page);
-        setImages((prevImages) => [...prevImages, ...data.results]);
+        setImages((prevImages: UnsplashImage[]) => [
+          ...prevImages,
+          ...data.results,
+        ]);
         setTotalPages(data.total_pages);
       } catch (err) {
-        setError(err.message);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Unknown error occurred");
+        }
       } finally {
         setIsLoading(false);
       }
@@ -36,7 +43,7 @@ function App() {
     fetchImagesBySearchValue();
   }, [searchValue, page]);
 
-  const onSubmit = (image) => {
+  const onSubmit = (image: string) => {
     setSearchValue(image);
     setImages([]);
     setPage(1);
@@ -46,7 +53,7 @@ function App() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const handleImageClick = (image) => {
+  const handleImageClick = (image: UnsplashImage) => {
     setModalImage(image);
     setIsOpenModal(true);
   };
@@ -69,8 +76,8 @@ function App() {
         <ImageModal
           isOpen={isOpenModal}
           onRequestClose={closeModal}
-          imageUrl={modalImage.urls.regular}
-          imageAlt={modalImage.alt_description}
+          imageUrl={modalImage.urls?.regular ?? modalImage.urls.full}
+          imageAlt={modalImage.alt_description || "No description available"}
         />
       )}
     </>
@@ -78,19 +85,3 @@ function App() {
 }
 
 export default App;
-
-// useEffect(() => {
-//   const fetchImages = async () => {
-//     try {
-//       setIsLoading(true);
-//       const data = await requestAllImages();
-//       setImages(data);
-//     } catch (err) {
-//       setError(err.message);
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   fetchImages();
-// }, []);

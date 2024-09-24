@@ -4,8 +4,8 @@ import css from "../ImageModal/ImageModal.module.css";
 interface ImageModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  imageUrl: "string";
-  imageAlt: "string";
+  imageUrl: string;
+  imageAlt: string;
 }
 
 const ImageModal: React.FC<ImageModalProps> = ({
