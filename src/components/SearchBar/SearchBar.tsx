@@ -11,10 +11,10 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const form = evt.target;
-    const image = form.elements.image.value;
+    const form = evt.target as HTMLFormElement;
+    const image = (form.elements.namedItem("image") as HTMLInputElement).value;
 
-    if (form.elements.image.value.trim() === "") {
+    if (image.trim() === "") {
       notify();
       return;
     }
