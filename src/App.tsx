@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { requestAllImages, requestAImagesBySearchValue } from "./services/api";
+import { requestAImagesBySearchValue } from "./services/api";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";

@@ -22,7 +22,6 @@ const ImageModal: React.FC<ImageModalProps> = ({
       overlayClassName={css.overlay}
       shouldCloseOnOverlayClick={true}
       shouldCloseOnEsc={true}
-      // ariaHideApp={false} // Для уникнення помилки в консолі під час розробки
     >
       <img src={imageUrl} alt={imageAlt} className={css.modalImage} />
     </ReactModal>

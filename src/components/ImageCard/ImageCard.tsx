@@ -1,6 +1,5 @@
 import React from "react";
 import css from "../ImageCard/ImageCard.module.css";
-import { Images } from "../../types";
 
 interface ImageCardProps {
   url: "string";
@@ -14,5 +13,3 @@ export const ImageCard: React.FC<ImageCardProps> = ({ url, desc }) => {
     </div>
   );
 };
-
-// export default ImageCard;
