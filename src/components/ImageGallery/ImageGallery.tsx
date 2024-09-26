@@ -21,10 +21,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
               key={image.id}
               onClick={() => onImageClick(image)}
             >
-              <ImageCard
-                url={image.urls.small}
-                desc={image.urls.alt_description}
-              />
+              <ImageCard url={image.urls.small} desc={image.alt_description} />
             </li>
           );
         })}

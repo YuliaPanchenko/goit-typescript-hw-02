@@ -2,8 +2,8 @@ import React from "react";
 import css from "../ImageCard/ImageCard.module.css";
 
 interface ImageCardProps {
-  url: "string";
-  desc: "string";
+  url: string;
+  desc: string;
 }
 
 export const ImageCard: React.FC<ImageCardProps> = ({ url, desc }) => {
